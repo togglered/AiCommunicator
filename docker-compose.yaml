@@ -4,13 +4,14 @@ services:
   waha:
     image: devlikeapro/waha
     container_name: waha
+    env_file:
+      - ../.env
+    volumes:
+      - ../sessions:/app/.sessions
     ports:
       - "3000:3000"
-      - "3001:3001"
-    environment:
-      - 
-      - WHATSAPP_DEFAULT_ENGINE=WEBJS
-      - WAHA_PRINT_QR=True
+    tty: true
+    stdin_open: true
     restart: unless-stopped
 
   bot:
