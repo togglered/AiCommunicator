@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  waha:
+    image: devlikeapro/waha
+    container_name: waha
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    environment:
+      - 
+      - WHATSAPP_DEFAULT_ENGINE=WEBJS
+      - WAHA_PRINT_QR=True
+    restart: unless-stopped
+
+  bot:
+    build: .
+    container_name: waha-bot
+    depends_on:
+      - waha
+    env_file:
+      - .env
+    restart: unless-stopped
